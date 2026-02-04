@@ -1,8 +1,4 @@
-# basic-ruby-projects
 
-Ruby is very object-oriented. It means that everything in Ruby is an object
-Strings need to be stored even if an existing string exists with same value. Symbols only are stored once
-```
 # Ruby Course — roadmap and repository overview
 
 This repository is a compact, project-based Ruby course covering fundamental topics and small exercises. It's organized as a learning path you can follow: read the short notes, open the example files in each mini-project, run them, and modify them to experiment.
@@ -48,5 +44,3 @@ Contributing
 
 - Make a branch named `feature/<short-name>` for changes.
 - Commit with clear messages and open a PR when ready.
-
-If you'd like, I can also scaffold OOP starter folders (for example `tic-tac-toe/`) next.
