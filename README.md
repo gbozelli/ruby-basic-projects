@@ -34,6 +34,23 @@ Substrings
 `[i, j]`
 `[-i]`
 
+Example (from `substrings/substrings.rb`): count words from a dictionary inside a string
+```ruby
+def substrings(string, dictionary)
+  superstring = string.split(" ").join
+  counts = Hash.new(0)
+  dictionary.each do |word|
+    window = word.length
+    (0..(superstring.length - window)).each do |i|
+      counts[word] += 1 if superstring[i, window] == word
+    end
+  end
+  counts
+end
+
+puts substrings("below", ["below","low","own"]) #=> {"below"=>1, "low"=>1, "own"=>1}
+```
+
 Interpolation
 - used to put variable in string
 
@@ -61,6 +78,21 @@ puts "Hello, #{name}" #=> "Hello, Odin"
 Converting object to string
 
 - `.to_s`
+
+### Example: Caesar cipher (string iteration)
+This shows simple character iteration and conversion between characters and codes (see `caesar-cipher/caesar-cipher.rb`):
+```ruby
+def caesar_cipher(text, shift)
+  cipher = ""
+  text.each_char do |char|
+    char_code = char.ord + shift % 26
+    cipher << char_code.chr
+  end
+  cipher
+end
+
+puts caesar_cipher('y', 2) #=> (example result using this simple implementation)
+```
 
 ## Symbols
 
@@ -200,6 +232,7 @@ for i in (j..k)
   action
 end
 ```
+Note on ranges when indexing arrays: prefer exclusive ranges `(0...n)` for indices to avoid accessing `array[n]`, which is nil and causes errors when used in arithmetic (see `stock-piper/stock-piper.rb`).
 - `times`
 ```
 number.times do 
@@ -256,6 +289,50 @@ Methods:
 -`.reverse`
 -`.include?`
 -`.join`
+
+Example: sorting and pair-finding exercises using arrays
+
+Bubble sort (from `bubble-sort/bubble-sort.rb`):
+```ruby
+def bubble_sort(array)
+  loop do
+    swapped = false
+    (0...(array.length - 1)).each do |i|
+      if array[i] > array[i+1]
+        array[i], array[i+1] = array[i+1], array[i]
+        swapped = true
+      end
+    end
+    break unless swapped
+  end
+  array
+end
+
+puts bubble_sort([4,3,78,2,0,2]) #=> [0,2,2,3,4,78]
+```
+
+Stock piper (best buy/sell indices, from `stock-piper/stock-piper.rb`):
+```ruby
+def stock_piper(days)
+  n = days.length
+  best_buy = 0
+  best_sell = 0
+  max_profit = 0
+  (0...n).each do |i|
+    (i+1...n).each do |j|
+      profit = days[j] - days[i]
+      if profit > max_profit
+        max_profit = profit
+        best_buy = i
+        best_sell = j
+      end
+    end
+  end
+  [best_buy, best_sell]
+end
+
+puts stock_piper([17,3,6,9,15,8,6,1,10]) #=> [7,4] (example indices)
+```
 
 # Hashes
 
